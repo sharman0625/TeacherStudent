@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h3>You are <strong> {{ profession }} </strong></h3>
+    <br><br>
+    {% if profession == 'student' %}
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h4>Hey Student! Ask Doubts to : </h4>
+				</div>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Sr. No.</th>
+							<th>Teacher</th>
+							<th>Chat</th>
+						</tr>
+						{%for obj in lst%}
+							<tr>
+								<td>{{forloop.counter}}</td>
+								<td>{{obj.name}}</td>
+								<td><a href="{% url 'startchatWithTeacher' obj.id %}">Chat Link</a></td>
+							</tr>
+						{%endfor%}					
+					</table>
+				</div>
+			</div>			
+		</div>
+    {% else %}
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h4>Hey Teacher, these are your Students : </h4>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Student</th>
+                        <th>Chat</th>
+                    </tr>
+                    {%for obj in lst%}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{obj.name}}</td>
+                            <td><a href="{% url 'startchatWithTeacher' obj.id %}">Chat Link</a></td>
+                        </tr>
+                    {%endfor%}					
+                </table>
+            </div>
+        </div>			
+    </div>
+</div>
+{% endblock content %}
